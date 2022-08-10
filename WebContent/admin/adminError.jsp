@@ -20,8 +20,8 @@ color:white;}
 <title>Error</title>
 </head>
 <body>
-<h1>Your Session has expired!</h1>
+<h1>Your session has expired!</h1>
 <h1>Please login again!</h1>
-<h1><a href="login.jsp">login</a></h1>
+<h1><a href="../login.jsp">login</a></h1>
 </body>
 </html>

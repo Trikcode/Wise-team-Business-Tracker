@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script src="https://kit.fontawesome.com/3beab63c5d.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../css/bootstrap1.css">
 <title>Home</title>
 <style>
@@ -14,47 +13,31 @@ h3
 {
 	color: yellow;
 	text-align: center;
+	font-size:18px
 }
-
 .input-style{
   border-radius:20px;
    padding: 12px 15px;
 }
-h3{
-font-size:18px
-}
+
 table td{
 color:black !important;
 }
 </style>
 </head>
 <body>
-<div style="color: white; text-align: center; font-size: 30px;">All Products & Edit Products <i class='fab fa-elementor'></i></div>
-<%
-String msg = request.getParameter("msg");
-if("success".equals(msg))
-{%>
-<h3 class="alert">Product Successfully Updated!</h3>
-
-<%} %>
-<%
-if("failed".equals(msg))
-{%>
-<h3 class="alert">Some thing went wrong! Try again!</h3>
-<%} %>
-
-
+<div style="color: white; text-align: center; font-size: 30px;"> Our Customers <i class='fab fa-elementor'></i></div>
 
 <table>
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col"> Price</th>
-            <th scope="col"> Staff</th>
-            <th>Status</th>
-            <th scope="col">Edit <i class='fas fa-pen-fancy'></i></th>
+             <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col"> Gender</th>
+            <th scope="col"> preference</th>
+            <th scope="col">Address</th>
+        
+            
           </tr>
         </thead>
         <tbody>
@@ -62,7 +45,7 @@ if("failed".equals(msg))
        try{
     	   Connection con = DbConnection.getCon();
     	   Statement st = con.createStatement();
-    	   ResultSet rs = st.executeQuery("select * from product");
+    	   ResultSet rs = st.executeQuery("select * from users");
     	   while(rs.next()){
     		   
        %>
@@ -70,11 +53,10 @@ if("failed".equals(msg))
             <td><%=rs.getString(1) %></td>
             <td><%=rs.getString(2) %></td>
             <td><%=rs.getString(3) %></td>
-            <td><%=rs.getString(4) %></td>
+          
             <td><%=rs.getString(5) %></td>
             <td><%=rs.getString(6) %></td>
-          
-            <td><a href="editProduct.jsp?id=<%=rs.getString(1) %>"><i class='fas fa-edit'></i></a></td>
+                    
           </tr>
          <%}}
        catch(Exception e){

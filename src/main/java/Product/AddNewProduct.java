@@ -1,4 +1,4 @@
-package Authentication;
+package Product;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,47 +10,45 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/Signup")
-public class SignupAction extends HttpServlet {
+@WebServlet("/addNewProduct")
+public class AddNewProduct  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request,
 HttpServletResponse response)
 		throws ServletException, IOException
 	{
+		String id = request.getParameter("id");
 		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String gender = request.getParameter("gender");
-		String location = request.getParameter("location");
-		String preference = request.getParameter("preference");
-		String city = request.getParameter("city");
+		String category = request.getParameter("category");
+		String price = request.getParameter("price");
+		String staff = request.getParameter("staff");
+		String active = request.getParameter("active");
 		try {
 		
 			// Initialize the database
 			Connection con = DbConnection.getCon();
-			PreparedStatement ps = con.prepareStatement("insert into users values(?, ?, ?, ?, ?, ?, ?)");
-			ps.setString(1, name);
-			ps.setString(2, email);
-			ps.setString(3, gender);
-			ps.setString(4, password);
-			ps.setString(5, preference);
-			ps.setString(6, location);
-			ps.setString(7, city);
+			PreparedStatement ps = con.prepareStatement("insert into product values(?, ?, ?, ?, ?, ?, ?)");
+			ps.setString(1, id);
+			ps.setString(2, name);
+			ps.setString(3, category);
+			ps.setString(4, price);
+			ps.setString(5, staff);
+			ps.setString(6, active);
+			ps.setInt(7, 0);
 			
 			ps.executeUpdate();
 
 			// Close all the connections
 			ps.close();
 			con.close();
-			response.sendRedirect("signup.jsp?msg=valid");
+			response.sendRedirect("./admin/addNewProduct.jsp?msg=success");
 
 		
 		}
 		catch (Exception e) {
 			System.out.println(e);
-			response.sendRedirect("signup.jsp?msg=invalid");
+			response.sendRedirect("./admin/addNewProduct.jsp?msg=failed");
 		
 		}
 	}

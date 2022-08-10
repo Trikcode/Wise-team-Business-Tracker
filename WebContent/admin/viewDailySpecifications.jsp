@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script src="https://kit.fontawesome.com/3beab63c5d.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../css/bootstrap1.css">
 <title>Home</title>
 <style>
@@ -15,7 +14,6 @@ h3
 	color: yellow;
 	text-align: center;
 }
-
 .input-style{
   border-radius:20px;
    padding: 12px 15px;
@@ -29,32 +27,44 @@ color:black !important;
 </style>
 </head>
 <body>
-<div style="color: white; text-align: center; font-size: 30px;">All Products & Edit Products <i class='fab fa-elementor'></i></div>
 <%
-String msg = request.getParameter("msg");
-if("success".equals(msg))
-{%>
-<h3 class="alert">Product Successfully Updated!</h3>
-
+String message = request.getParameter("msg");
+if("exists".equals(message)){
+%>
+<h3 class="alert">Short term staff updated!</h3>
+	
 <%} %>
 <%
-if("failed".equals(msg))
-{%>
-<h3 class="alert">Some thing went wrong! Try again!</h3>
+
+if("existm".equals(message)){
+%>
+<h3 class="alert">Mid term staff updated!</h3>
+	
 <%} %>
 
+<%
 
+if("existl".equals(message)){
+%>
+<h3 class="alert">Long term staff updated!</h3>
+	
+<%} %>
+
+<div style="color: white; text-align: center; font-size: 30px;">Specifications</div>
 
 <table>
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col"> Price</th>
-            <th scope="col"> Staff</th>
-            <th>Status</th>
-            <th scope="col">Edit <i class='fas fa-pen-fancy'></i></th>
+             <th scope="col">Short term Products</th>
+             <th scope="col">Mid term Products</th>
+             <th scope="col">Long term Products</th>
+           
+            <th scope="col">short term staff</th>
+            <th scope="col">mid term staff</th>
+            <th scope="col">long term staff</th>
+            <th scope="col"> Date</th>
+              
+            
           </tr>
         </thead>
         <tbody>
@@ -62,7 +72,7 @@ if("failed".equals(msg))
        try{
     	   Connection con = DbConnection.getCon();
     	   Statement st = con.createStatement();
-    	   ResultSet rs = st.executeQuery("select * from product");
+    	   ResultSet rs = st.executeQuery("select * from specification");
     	   while(rs.next()){
     		   
        %>
@@ -70,11 +80,12 @@ if("failed".equals(msg))
             <td><%=rs.getString(1) %></td>
             <td><%=rs.getString(2) %></td>
             <td><%=rs.getString(3) %></td>
+          
             <td><%=rs.getString(4) %></td>
             <td><%=rs.getString(5) %></td>
-            <td><%=rs.getString(6) %></td>
-          
-            <td><a href="editProduct.jsp?id=<%=rs.getString(1) %>"><i class='fas fa-edit'></i></a></td>
+             <td><%=rs.getString(6) %></td>
+             <td><%=rs.getString(7) %></td>
+                    
           </tr>
          <%}}
        catch(Exception e){
@@ -86,6 +97,9 @@ if("failed".equals(msg))
       </table>
       <br>
       <br>
+      <div style="text-align:center">
+      <a href="reallocate.jsp"><button style="padding:15px; background-color:red; color:white;">Reallocate Staff</button></a>
+      </div>
       <br>
 
 </body>

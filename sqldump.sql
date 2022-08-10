@@ -18,6 +18,9 @@
 --
 -- Table structure for table `cart`
 --
+--
+-- Wise Team
+--
 
 DROP TABLE IF EXISTS `cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
